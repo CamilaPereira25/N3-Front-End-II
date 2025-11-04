@@ -1,13 +1,192 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Definindo nossas variáveis de cor (CSS Variables) */
+:root {
+  --cor-fundo: #FFFBF5;         /* Creme Suave (quase branco) */
+  --cor-caixa: #FFF0F5;         /* Rosa Pálido (para as caixas dos dias) */
+  --cor-texto: #5c4b51;         /* Um marrom-rosado escuro para texto */
+  --cor-titulo-dia: #d9aab7;    /* Um rosa mais forte para títulos de dia */
+  --cor-titulo-app: #e6a4b4;    /* Título principal mais vibrante */
+  --cor-destaque: #FFE5D9;      /* Pêssego Claro (botões, destaques) */
+  --cor-sombra: #EAE0D5;        /* Sombra suave */
+  --cor-concluido: #b0a8b9;     /* Cor para texto de item concluído */
+
+  /* Fontes */
+  --fonte-titulo: 'Pacifico', cursive;
+  --fonte-texto: 'Nunito', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: var(--fonte-texto);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+/* --- App e Planner --- */
+.planner-container {
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.planner-titulo {
+  font-family: var(--fonte-titulo);
+  color: var(--cor-titulo-app);
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: 400; /* Fontes script ficam melhores assim */
+  margin-bottom: 30px;
+}
+
+/* O grid da nossa semana */
+.semana-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsivo */
+  gap: 20px;
+  padding: 10px;
+}
+
+/* --- Coluna do Dia --- */
+.dia-coluna {
+  background-color: var(--cor-caixa);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 10px var(--cor-sombra);
+  min-height: 300px;
+}
+
+.dia-titulo {
+  font-family: var(--fonte-texto);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--cor-titulo-dia);
+  text-transform: capitalize; 
+  border-bottom: 2px dashed var(--cor-destaque);
+  padding-bottom: 8px;
+  text-align: center;
+  margin-top: 0;
+}
+
+/* --- Formulário de Nova Atividade --- */
+.form-nova-atividade {
+  display: flex;
+  margin-top: 15px;
+  gap: 5px;
+}
+
+.input-nova-atividade {
+  flex-grow: 1;
+  border: 1px solid var(--cor-destaque);
+  border-radius: 6px;
+  padding: 8px;
+  font-family: var(--fonte-texto);
+  font-size: 0.9rem;
+}
+.input-nova-atividade:focus {
+  outline: 1px solid var(--cor-titulo-dia);
+}
+
+.btn-add-atividade {
+  border: none;
+  background-color: var(--cor-destaque);
+  color: var(--cor-texto);
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.btn-add-atividade:hover {
+  transform: scale(1.1);
+}
+
+/* --- Item da Atividade --- */
+.atividade-item {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px var(--cor-sombra);
+  word-break: break-word; /* Quebra palavras longas */
+}
+
+.atividade-checkbox {
+  margin-right: 10px;
+  /* Estilização fofa do checkbox */
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cor-titulo-dia);
+}
+
+.atividade-titulo {
+  flex-grow: 1;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.atividade-titulo.concluida {
+  text-decoration: line-through;
+  color: var(--cor-concluido);
+}
+
+.btn-deletar-atividade {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--cor-concluido);
+  padding: 5px;
+}
+.btn-deletar-atividade:hover {
+  color: #ff6666; /* Vermelho para perigo */
+}
+
+
+/* --- Modal de Parabéns --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-conteudo {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--cor-fundo);
+  border: 2px solid var(--cor-titulo-app);
+}
+
+.modal-emoji {
+  font-size: 3rem;
+}
+
+.modal-frase {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cor-texto);
+  margin: 15px 0;
+}
+
+.modal-btn-fechar {
+  background-color: var(--cor-titulo-app);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
 }
