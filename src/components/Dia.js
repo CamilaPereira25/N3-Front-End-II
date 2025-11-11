@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
 import Atividade from './Atividade';
 
-function Dia({ nomeDia, atividades, onToggle, onDelete, onCreate }) {
-  // Estado local para controlar o input de nova atividade
+const DIAS_SEMANA_NOMES = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+
+function Dia({ date, atividades, onToggle, onDelete, onCreate }) {
   const [novoTitulo, setNovoTitulo] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Impede o recarregamento da página
-    if (novoTitulo.trim() === '') return; // Não adiciona se vazio
+    e.preventDefault(); 
+    if (novoTitulo.trim() === '') return; 
 
-    onCreate(nomeDia, novoTitulo); // Chama a função do Planner
-    setNovoTitulo(''); // Limpa o input
+    // Converte o objeto Date para o formato 'YYYY-MM-DD'
+    const dateString = date.toISOString().split('T')[0];
+
+    onCreate(dateString, novoTitulo); // Chama a função do Planner
+    setNovoTitulo(''); 
   };
+
+  // Formata o título (ex: "Seg (10/11)")
+  const nomeDia = DIAS_SEMANA_NOMES[date.getDay()];
+  const dataFormatada = `${date.getDate()}/${date.getMonth() + 1}`;
 
   return (
     <div className="dia-coluna">
-      <h2 className="dia-titulo">{nomeDia}</h2>
+      <h2 className="dia-titulo">
+        {nomeDia}
+        <span className="data-num">{dataFormatada}</span>
+      </h2>
       
-      {/* Lista de Atividades (READ) */}
       <div className="lista-atividades">
         {atividades.map(atv => (
           <Atividade 
@@ -29,7 +39,7 @@ function Dia({ nomeDia, atividades, onToggle, onDelete, onCreate }) {
         ))}
       </div>
 
-      {/* Formulário (CREATE) */}
+      {/* Formulário com novo botão '✓' */}
       <form className="form-nova-atividade" onSubmit={handleSubmit}>
         <input 
           type="text"
@@ -38,7 +48,7 @@ function Dia({ nomeDia, atividades, onToggle, onDelete, onCreate }) {
           value={novoTitulo}
           onChange={(e) => setNovoTitulo(e.target.value)}
         />
-        <button type="submit" className="btn-add-atividade">+</button>
+        <button type="submit" className="btn-add-atividade">✓</button>
       </form>
     </div>
   );

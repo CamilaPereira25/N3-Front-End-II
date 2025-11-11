@@ -1,16 +1,17 @@
-/* Definindo nossas variáveis de cor (CSS Variables) */
+/* --- 1. Nova Paleta de Cores e Fontes --- */
 :root {
-  --cor-fundo: #FFFBF5;         /* Creme Suave (quase branco) */
-  --cor-caixa: #FFF0F5;         /* Rosa Pálido (para as caixas dos dias) */
-  --cor-texto: #5c4b51;         /* Um marrom-rosado escuro para texto */
-  --cor-titulo-dia: #d9aab7;    /* Um rosa mais forte para títulos de dia */
-  --cor-titulo-app: #e6a4b4;    /* Título principal mais vibrante */
-  --cor-destaque: #FFE5D9;      /* Pêssego Claro (botões, destaques) */
+  /* Tons "Bebê" - Lilás, Creme, Rosa Claro */
+  --cor-fundo: #FFFBFD;         /* Creme (quase branco) */
+  --cor-caixa: #FDF5FF;         /* Lilás bem clarinho (fundo dos dias) */
+  --cor-texto: #5c5470;         /* Roxo/Cinza escuro para texto */
+  --cor-titulo-dia: #a391c4;    /* Lilás médio para títulos de dia */
+  --cor-titulo-app: #d3aed4;    /* Lilás/Rosa para título principal */
+  --cor-destaque: #FCE4EC;      /* Rosa Claro (botões, destaques) */
   --cor-sombra: #EAE0D5;        /* Sombra suave */
   --cor-concluido: #b0a8b9;     /* Cor para texto de item concluído */
 
-  /* Fontes */
-  --fonte-titulo: 'Pacifico', cursive;
+  /* Novas Fontes */
+  --fonte-titulo: 'Allura', cursive;
   --fonte-texto: 'Nunito', sans-serif;
 }
 
@@ -21,7 +22,7 @@ body {
   color: var(--cor-texto);
 }
 
-/* --- App e Planner --- */
+/* --- 2. Título do App (Sem flor, fonte Allura) --- */
 .planner-container {
   padding: 20px;
   max-width: 1600px;
@@ -32,32 +33,91 @@ body {
   font-family: var(--fonte-titulo);
   color: var(--cor-titulo-app);
   text-align: center;
-  font-size: 3.5rem;
-  font-weight: 400; /* Fontes script ficam melhores assim */
-  margin-bottom: 30px;
+  font-size: 5rem; /* Fonte Allura é mais fina, pode ser maior */
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
-/* O grid da nossa semana */
+/* --- 3. Novo Toggle de Visualização (Mês/Semana) --- */
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #f7f0ff; /* Lilás mais claro */
+  border-radius: 50px;
+  padding: 5px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.toggle-btn {
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  flex: 1;
+  background-color: transparent;
+  color: var(--cor-titulo-dia);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-btn.active {
+  background-color: var(--cor-titulo-app);
+  color: white;
+  box-shadow: 0 2px 10px rgba(163, 145, 196, 0.3);
+}
+
+/* --- 4. Novo Header do Calendário (Setas < >) --- */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-nav-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--cor-titulo-dia);
+  cursor: pointer;
+}
+
+.calendar-header h2 {
+  font-family: var(--fonte-texto);
+  font-weight: 800;
+  color: var(--cor-titulo-dia);
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+/* --- 5. Layout Semanal (7 dias em 1 linha) --- */
 .semana-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsivo */
-  gap: 20px;
+  grid-template-columns: repeat(7, 1fr); /* 7 colunas iguais, sem quebra */
+  gap: 10px; /* Menor espaçamento */
   padding: 10px;
 }
 
-/* --- Coluna do Dia --- */
 .dia-coluna {
   background-color: var(--cor-caixa);
   border-radius: 12px;
   padding: 15px;
   box-shadow: 0 4px 10px var(--cor-sombra);
   min-height: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .dia-titulo {
   font-family: var(--fonte-texto);
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--cor-titulo-dia);
   text-transform: capitalize; 
   border-bottom: 2px dashed var(--cor-destaque);
@@ -65,11 +125,60 @@ body {
   text-align: center;
   margin-top: 0;
 }
+.dia-titulo .data-num {
+  font-weight: 400;
+  font-size: 0.85rem;
+  display: block;
+}
 
-/* --- Formulário de Nova Atividade --- */
+/* --- 6. Novo Layout Mensal (Grid de Calendário) --- */
+.mes-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.mes-header-dia {
+  font-weight: 700;
+  color: var(--cor-titulo-dia);
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.dia-celula {
+  background-color: var(--cor-caixa);
+  border-radius: 8px;
+  padding: 8px;
+  min-height: 120px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.dia-celula.fora-mes {
+  background-color: transparent;
+  color: var(--cor-concluido);
+}
+.dia-celula-atividades {
+  margin-top: 5px;
+}
+.dia-celula-atv {
+  font-size: 0.8rem;
+  font-weight: 400;
+  background-color: var(--cor-destaque);
+  padding: 2px 5px;
+  border-radius: 4px;
+  display: block;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- 7. Novo Botão de Adicionar (Check ✓) --- */
 .form-nova-atividade {
   display: flex;
-  margin-top: 15px;
+  margin-top: auto; /* Empurra o form para o fim da coluna */
+  padding-top: 15px;
   gap: 5px;
 }
 
@@ -88,10 +197,12 @@ body {
 .btn-add-atividade {
   border: none;
   background-color: var(--cor-destaque);
-  color: var(--cor-texto);
-  font-weight: 700;
+  color: var(--cor-titulo-dia);
+  font-weight: 900;
+  font-size: 1.2rem; /* Tamanho do '✓' */
+  line-height: 1;
   border-radius: 6px;
-  padding: 0 12px;
+  width: 40px; /* Largura fixa */
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -99,7 +210,8 @@ body {
   transform: scale(1.1);
 }
 
-/* --- Item da Atividade --- */
+/* --- 8. Estilos Antigos (Atividade, Modal) --- */
+/* (Estes continuam quase iguais, só herdam as novas cores) */
 .atividade-item {
   display: flex;
   align-items: center;
@@ -108,16 +220,15 @@ body {
   border-radius: 8px;
   margin-top: 10px;
   box-shadow: 0 2px 4px var(--cor-sombra);
-  word-break: break-word; /* Quebra palavras longas */
+  word-break: break-word; 
 }
 
 .atividade-checkbox {
   margin-right: 10px;
-  /* Estilização fofa do checkbox */
   cursor: pointer;
   width: 18px;
   height: 18px;
-  accent-color: var(--cor-titulo-dia);
+  accent-color: var(--cor-titulo-dia); /* Usa a cor lilás */
 }
 
 .atividade-titulo {
@@ -140,11 +251,9 @@ body {
   padding: 5px;
 }
 .btn-deletar-atividade:hover {
-  color: #ff6666; /* Vermelho para perigo */
+  color: #ff6666; 
 }
 
-
-/* --- Modal de Parabéns --- */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -168,9 +277,7 @@ body {
   border: 2px solid var(--cor-titulo-app);
 }
 
-.modal-emoji {
-  font-size: 3rem;
-}
+.modal-emoji { font-size: 3rem; }
 
 .modal-frase {
   font-size: 1.5rem;
