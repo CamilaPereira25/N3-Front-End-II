@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Função helper para gerar os dias do mês
+// Função helper (sem mudança)
 const gerarDiasCalendario = (dataBase) => {
   const calendario = [];
   const data = new Date(dataBase);
@@ -10,23 +10,23 @@ const gerarDiasCalendario = (dataBase) => {
   const primeiroDia = new Date(ano, mes, 1);
   const ultimoDia = new Date(ano, mes + 1, 0);
   
-  const offsetInicio = primeiroDia.getDay(); // 0 (Dom) - 6 (Sab)
+  const offsetInicio = primeiroDia.getDay(); 
   const totalDias = ultimoDia.getDate();
 
-  // 1. Dias do mês anterior
+  // Dias do mês anterior
   for (let i = offsetInicio; i > 0; i--) {
     const dia = new Date(primeiroDia);
     dia.setDate(dia.getDate() - i);
     calendario.push({ date: dia, foraMes: true });
   }
 
-  // 2. Dias do mês atual
+  // Dias do mês atual
   for (let i = 1; i <= totalDias; i++) {
     const dia = new Date(ano, mes, i);
     calendario.push({ date: dia, foraMes: false });
   }
 
-  // 3. Dias do próximo mês (para completar 6 semanas = 42 dias)
+  // Dias do próximo mês
   const offsetFim = 42 - calendario.length;
   for (let i = 1; i <= offsetFim; i++) {
     const dia = new Date(ultimoDia);
@@ -38,12 +38,13 @@ const gerarDiasCalendario = (dataBase) => {
 };
 
 
-function MesGrid({ dataBase, atividades, diasNomes }) {
+// --- MODIFICADO: Adicionamos a prop 'onDiaClick' ---
+function MesGrid({ dataBase, atividades, diasNomes, onDiaClick }) {
   const diasDoMes = gerarDiasCalendario(dataBase);
 
   return (
     <div className="mes-grid">
-      {/* Cabeçalho com nomes dos dias */}
+      {/* Cabeçalho (sem mudança) */}
       {diasNomes.map(nome => (
         <div key={nome} className="mes-header-dia">{nome}</div>
       ))}
@@ -51,18 +52,25 @@ function MesGrid({ dataBase, atividades, diasNomes }) {
       {/* Células dos dias */}
       {diasDoMes.map(({ date, foraMes }) => {
         const dateString = date.toISOString().split('T')[0];
-        
-        // Filtra atividades SÓ para esse dia
         const atividadesDoDia = atividades.filter(atv => atv.date === dateString);
         
-        const classeCSS = `dia-celula ${foraMes ? 'fora-mes' : ''}`;
+        let classeCSS = `dia-celula ${foraMes ? 'fora-mes' : ''}`;
+
+        // --- MODIFICADO: Função de clique ---
+        const handleClick = () => {
+          // Só faz algo se for um dia DENTRO do mês
+          if (!foraMes && onDiaClick) {
+            onDiaClick(date);
+          }
+        };
 
         return (
-          <div key={dateString} className={classeCSS}>
+          // --- MODIFICADO: Adicionamos o onClick ---
+          <div key={dateString} className={classeCSS} onClick={handleClick}>
             <span>{date.getDate()}</span>
             
             <div className="dia-celula-atividades">
-              {atividadesDoDia.slice(0, 3).map(atv => ( // Mostra no máx 3
+              {atividadesDoDia.slice(0, 3).map(atv => (
                 <span key={atv.id} className="dia-celula-atv">
                   {atv.titulo}
                 </span>

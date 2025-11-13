@@ -297,3 +297,13 @@ body {
   font-size: 1rem;
   cursor: pointer;
 }
+
+/* --- 9. NOVO: Célula Clicável (Visão Mensal) --- */
+.dia-celula.fora-mes {
+  background-color: var(--cor-fundo); /* Deixa os dias de fora mais apagados */
+}
+
+.dia-celula:not(.fora-mes):hover {
+  background-color: var(--cor-destaque); /* Rosa claro ao passar o mouse */
+  cursor: pointer;
+}

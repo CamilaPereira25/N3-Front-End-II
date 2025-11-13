@@ -1,0 +1,50 @@
+/* src/components/SugestoesTarefas.css */
+.sugestoes-container {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: var(--cor-caixa); 
+  border-radius: 12px;
+}
+
+.sugestoes-titulo {
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  color: var(--cor-titulo-dia);
+  font-size: 0.9rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.sugestoes-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-sugestao {
+  background-color: transparent; /* Fundo transparente */
+  color: var(--cor-texto);
+  /* --- NOVO: Adicionei borda e flex --- */
+  border: 2px solid var(--cor-destaque); /* Borda padrão rosa claro */
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-family: var(--fonte-texto);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  display: flex; /* Para alinhar ícone e texto */
+  align-items: center; /* Centraliza verticalmente */
+}
+
+.chip-sugestao:hover {
+  background-color: var(--cor-titulo-app); 
+  color: white;
+  border-color: var(--cor-titulo-app); /* Mude a cor da borda no hover */
+}
+
+/* Estilo para o ícone dentro do chip */
+.chip-sugestao svg {
+  font-size: 1rem; /* Tamanho do ícone */
+}

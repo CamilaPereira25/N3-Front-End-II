@@ -1,0 +1,104 @@
+/* Fundo escuro (Overlay) */
+.modal-login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(60, 50, 70, 0.6); /* Cor escura com base no lilás */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* O "pop-up quadrado no centro" */
+.modal-login-content {
+  background-color: var(--cor-fundo); /* Nosso creme */
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  position: relative; /* Para o botão de fechar */
+}
+
+/* Botão de fechar (X) */
+.modal-login-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--cor-concluido);
+  cursor: pointer;
+}
+
+.modal-login-content h2 {
+  font-family: var(--fonte-texto);
+  font-weight: 800;
+  color: var(--cor-titulo-dia);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+/* Estilo do Formulário */
+.modal-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-login-form label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--cor-texto);
+}
+
+.modal-login-form input {
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid var(--cor-destaque); /* Rosa claro */
+  border-radius: 8px;
+}
+.modal-login-form input:focus {
+  outline: 2px solid var(--cor-titulo-dia); /* Lilás */
+}
+
+/* Botão de Submit (Entrar/Criar) */
+.btn-submit {
+  background-color: var(--cor-titulo-app); /* Lilás/Rosa */
+  color: white;
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Mensagem de Erro */
+.modal-login-error {
+  color: #d9534f; /* Vermelho */
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Link para trocar de Login/Cadastro */
+.modal-login-switch {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 20px;
+}
+.modal-login-switch span {
+  color: var(--cor-titulo-dia);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}

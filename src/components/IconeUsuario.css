@@ -1,0 +1,43 @@
+/* CSS para o Ícone de Usuário */
+.icone-usuario-container {
+  position: absolute; /* Flutua no topo */
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--cor-titulo-dia); /* Lilás médio */
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 50px;
+  background-color: #f7f0ff; /* Lilás bem claro */
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.icone-usuario-container:hover {
+  background-color: var(--cor-caixa); /* Lilás um pouco mais forte */
+}
+
+.icone-usuario-container.logado {
+  cursor: default;
+}
+
+.btn-logout {
+  background: none;
+  border: none;
+  color: var(--cor-titulo-dia);
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px;
+}
+.btn-logout:hover {
+  text-decoration: underline;
+}
+
+/* O SVG (ícone) */
+.icone-usuario-container svg {
+  stroke: var(--cor-titulo-dia);
+}

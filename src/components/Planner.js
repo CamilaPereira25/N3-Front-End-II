@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { dadosIniciais } from '../data/mockDados';
 import { frasesMotivacionais } from '../data/frases';
-import Dia from './Dia'; // Reutilizamos o Dia para a visão semanal
+import Dia from './Dia'; 
 import ModalParabens from './ModalParabens';
-
-// --- NOVOS COMPONENTES ---
 import ViewToggle from './ViewToggle';
-import MesGrid from './MesGrid'; // O novo grid do calendário mensal
+import MesGrid from './MesGrid'; 
+import SugestoesTarefas from './SugestoesTarefas';
 
 const CHAVE_STORAGE = 'n3:atividades';
 const DIAS_SEMANA_NOMES = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
-// --- Função Helper (nova) para formatar o Título do Header ---
+// --- Funções Helper (sem mudança) ---
 const formatarHeaderData = (data, view) => {
   const optionsMes = { month: 'long', year: 'numeric' };
   if (view === 'mensal') {
     return data.toLocaleDateString('pt-BR', optionsMes);
   }
   
-  // Lógica para header da semana
   const inicioSemana = new Date(data);
-  inicioSemana.setDate(data.getDate() - data.getDay()); // Início (Dom)
+  inicioSemana.setDate(data.getDate() - data.getDay());
   const fimSemana = new Date(inicioSemana);
-  fimSemana.setDate(inicioSemana.getDate() + 6); // Fim (Sab)
+  fimSemana.setDate(inicioSemana.getDate() + 6); 
 
   if (inicioSemana.getMonth() === fimSemana.getMonth()) {
     return `${inicioSemana.getDate()} - ${fimSemana.getDate()} de ${inicioSemana.toLocaleDateString('pt-BR', { month: 'long' })}`;
@@ -31,12 +29,9 @@ const formatarHeaderData = (data, view) => {
   }
 };
 
-// --- Função Helper (nova) para pegar os dias da semana ---
 const getSemanaAtual = (dataBase) => {
   const semana = [];
   const hoje = new Date(dataBase);
-  
-  // Encontra o início da semana (Domingo = 0)
   const primeiroDia = new Date(hoje.setDate(hoje.getDate() - hoje.getDay()));
 
   for (let i = 0; i < 7; i++) {
@@ -50,7 +45,7 @@ const getSemanaAtual = (dataBase) => {
 
 function Planner() {
   
-  // --- ESTADO (LocalStorage) ---
+  // --- Estados (sem mudança) ---
   const [atividades, setAtividades] = useState(() => {
     const dadosSalvos = localStorage.getItem(CHAVE_STORAGE);
     if (dadosSalvos) {
@@ -59,19 +54,17 @@ function Planner() {
     return dadosIniciais;
   });
   
-  // --- NOVOS ESTADOS ---
   const [modalVisivel, setModalVisivel] = useState(false);
   const [fraseModal, setFraseModal] = useState('');
-  const [view, setView] = useState('semanal'); // 'semanal' ou 'mensal'
-  const [currentDate, setCurrentDate] = useState(new Date('2025-11-10T12:00:00')); // Data base (usei a data do mock)
+  const [view, setView] = useState('semanal'); 
+  const [currentDate, setCurrentDate] = useState(new Date()); 
 
   // --- Salvar no LocalStorage (sem mudança) ---
   useEffect(() => {
     localStorage.setItem(CHAVE_STORAGE, JSON.stringify(atividades));
   }, [atividades]);
 
-  // --- Funções CRUD (adaptadas para 'date' string) ---
-
+  // --- Funções CRUD (sem mudança) ---
   const handleToggleConcluida = (id) => {
     const atividadeAlvo = atividades.find(atv => atv.id === id);
     const vaiConcluir = !atividadeAlvo.concluida; 
@@ -91,18 +84,17 @@ function Planner() {
     setAtividades(atividades.filter(atv => atv.id !== id));
   };
 
-  // Alterado para receber 'dateString'
   const handleCriarAtividade = (dateString, titulo) => {
     const novaAtividade = {
       id: Date.now(), 
-      date: dateString, // Salva como 'YYYY-MM-DD'
+      date: dateString, 
       titulo: titulo,
       concluida: false
     };
     setAtividades([...atividades, novaAtividade]);
   };
 
-  // --- Funções de Navegação (NOVAS) ---
+  // --- Funções de Navegação (sem mudança) ---
   const mudarData = (valor) => {
     const novaData = new Date(currentDate);
     if (view === 'mensal') {
@@ -113,20 +105,42 @@ function Planner() {
     setCurrentDate(novaData);
   };
 
+  // --- Função clique mensal (sem mudança) ---
+  const handleDiaClickMensal = (date) => {
+    setCurrentDate(date); 
+    setView('semanal'); 
+  };
+
+  // --- Função clique sugestão (sem mudança) ---
+  const handleSugestaoClick = (titulo) => {
+    const hoje = new Date();
+    const hojeFormatado = hoje.toISOString().split('T')[0];
+
+    const jaExiste = atividades.find(
+      atv => atv.date === hojeFormatado && atv.titulo === titulo
+    );
+
+    if (!jaExiste) {
+      handleCriarAtividade(hojeFormatado, titulo);
+    } else {
+      console.log("Tarefa já existe para hoje.");
+    }
+  };
+
+
   // --- Renderização Principal ---
   
-  // Pega os dias da semana (Domingo a Sábado)
   const diasDaSemana = getSemanaAtual(currentDate);
 
   return (
     <div className="planner-container">
-      {/* Título (sem flor) */}
-      <h1 className="planner-titulo">Projeto N3</h1>
+      {/* ===== TEXTO ALTERADO AQUI ===== */}
+      <h1 className="planner-titulo">Girl Planner</h1>
 
-      {/* Toggle Mês/Semana */}
+      {/* Toggle Mês/Semana (sem mudança) */}
       <ViewToggle viewAtual={view} onViewChange={setView} />
       
-      {/* Header de Navegação */}
+      {/* Header de Navegação (sem mudança) */}
       <div className="calendar-header">
         <button className="calendar-nav-btn" onClick={() => mudarData(-1)}>&lt;</button>
         <h2>{formatarHeaderData(currentDate, view)}</h2>
@@ -136,33 +150,33 @@ function Planner() {
       {/* Renderização Condicional (Mês ou Semana) */}
       
       {view === 'semanal' ? (
-        // --- VISÃO SEMANAL (Horizontal) ---
-        <div className="semana-grid">
-          {diasDaSemana.map((dia, index) => {
-            // Converte o obj Date para string 'YYYY-MM-DD'
-            const dateString = dia.toISOString().split('T')[0];
-            
-            // Filtra atividades SÓ para esse dia
-            const atividadesDoDia = atividades.filter(atv => atv.date === dateString);
-            
-            return (
-              <Dia 
-                key={dateString} 
-                date={dia} // Passa o objeto Date completo
-                atividades={atividadesDoDia}
-                onToggle={handleToggleConcluida}
-                onDelete={handleDeletarAtividade}
-                onCreate={handleCriarAtividade}
-              />
-            );
-          })}
-        </div>
+        <> 
+          <SugestoesTarefas onSugestaoClick={handleSugestaoClick} />
+          
+          <div className="semana-grid">
+            {diasDaSemana.map((dia) => {
+              const dateString = dia.toISOString().split('T')[0];
+              const atividadesDoDia = atividades.filter(atv => atv.date === dateString);
+              
+              return (
+                <Dia 
+                  key={dateString} 
+                  date={dia} 
+                  atividades={atividadesDoDia}
+                  onToggle={handleToggleConcluida}
+                  onDelete={handleDeletarAtividade}
+                  onCreate={handleCriarAtividade}
+                />
+              );
+            })}
+          </div>
+        </>
       ) : (
-        // --- VISÃO MENSAL (Nova) ---
         <MesGrid 
           dataBase={currentDate} 
           atividades={atividades} 
           diasNomes={DIAS_SEMANA_NOMES}
+          onDiaClick={handleDiaClickMensal} 
         />
       )}
 
