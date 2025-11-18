@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# 🌸 Girl Planner
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Projeto acadêmico (N3) desenvolvido para a disciplina de Front-end, por Camila Pereira e Gustavo Costa.
 
-## Available Scripts
+## 📋 Sobre o Projeto
 
-In the project directory, you can run:
+O **Girl Planner** é uma aplicação web de organização pessoal voltada para o bem-estar e rotina fitness feminina. O sistema funciona como um "planner digital", permitindo que a usuária gerencie suas metas diárias de saúde, como hidratação, exercícios e autocuidado.
 
-### `npm start`
+A proposta foi criar uma interface intuitiva e visualmente agradável, simulando uma experiência de aplicativo completo utilizando apenas tecnologias de Front-end e persistência de dados local.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Funcionalidades Principais
+* **Gestão de Tarefas (CRUD):** Criação, leitura, atualização e exclusão de metas diárias.
+* **Visualização Híbrida:** Alternância entre visão Semanal (detalhada) e Mensal (calendário).
+* **Gamificação:** Pop-ups motivacionais ao concluir tarefas.
+* **Sugestões Rápidas:** Barra de tarefas recomendadas com ícones para adição rápida.
+* **Autenticação Simulada:** Sistema de Login e Cadastro utilizando `localStorage`.
+* **Persistência:** Os dados não são perdidos ao recarregar a página.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🎨 Identidade Visual
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A interface foi desenhada com foco no minimalismo e na delicadeza, utilizando uma paleta de cores "soft" e tipografia elegante.
 
-### `npm run build`
+* **Paleta de Cores:**
+    * 🟣 **Lilás Suave:** Títulos e acentos.
+    * 🌫️ **Creme/Off-white:** Fundos para reduzir o cansaço visual.
+    * 🌸 **Rosa Blush:** Detalhes, botões e destaques.
+* **Tipografia:**
+    * *Títulos:* **Allura** (Script/Cursiva) - Traz elegância e personalidade.
+    * *Corpo:* **Nunito** (Sans-serif) - Garante legibilidade e modernidade.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Tecnologias Utilizadas
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* **React.js:** Biblioteca principal para construção da interface.
+* **CSS3:** Estilização com uso de variáveis (`:root`), Grid Layout e Flexbox.
+* **React Icons:** Biblioteca de ícones vetoriais.
+* **Local Storage API:** Utilizado para simular o banco de dados e manter a persistência de usuários e tarefas no navegador.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Como Executar o Projeto
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Siga o passo a passo abaixo para rodar a aplicação em sua máquina local.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Pré-requisitos
+Você precisa ter instalado em sua máquina:
+* [Node.js](https://nodejs.org/) (Versão LTS recomendada)
+* [Git](https://git-scm.com/)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Instalação
 
-## Learn More
+1.  **Clone o repositório:**
+    Abra o seu terminal e execute:
+    ```bash
+    git clone [https://github.com/SEU-USUARIO/N3-Front-End-II.git](https://github.com/SEU-USUARIO/N3-Front-End-II.git)
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2.  **Acesse a pasta do projeto:**
+    ```bash
+    cd N3-Front-End-II
+    ```
+    *(Nota: Verifique se o nome da pasta corresponde ao que foi clonado)*
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3.  **Instale as dependências:**
+    Este comando irá baixar todas as bibliotecas necessárias (React, React Icons, etc.) listadas no `package.json`.
+    ```bash
+    npm install
+    ```
 
-### Code Splitting
+4.  **Inicie o servidor de desenvolvimento:**
+    ```bash
+    npm start
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+5.  **Acesse no navegador:**
+    A aplicação abrirá automaticamente em:
+    > `http://localhost:3000`
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🤝 Colaboradores
 
-### Making a Progressive Web App
+Projeto desenvolvido para a avaliação N3.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+* **Camila Pereira**
+* **Gustavo Costa**
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Desenvolvido com 💜 e React.*
